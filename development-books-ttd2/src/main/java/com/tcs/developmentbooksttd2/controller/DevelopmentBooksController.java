@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcs.developmentbooksttd2.enums.BooksEnum;
 import com.tcs.developmentbooksttd2.service.BooksService;
 
 @RestController
@@ -15,7 +16,7 @@ public class DevelopmentBooksController {
 	BooksService service;
 
 	@GetMapping("/getAllBooks")
-	public List<String> getAllAvailableBooksName() {
+	public List<BooksEnum> getAllAvailableBooksName() {
 		return service.getAllBooks();
 	}
 }
