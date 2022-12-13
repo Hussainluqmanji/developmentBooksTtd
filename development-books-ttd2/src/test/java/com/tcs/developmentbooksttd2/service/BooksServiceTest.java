@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.tcs.developmentbooksttd2.model.Books;
+import com.tcs.developmentbooksttd2.model.BooksInput;
 
 public class BooksServiceTest {
 
@@ -17,4 +18,12 @@ public class BooksServiceTest {
 		List<Books> books = service.getAllBooks();
 		assertEquals(5, books.size());
 	}
+	
+    @Test
+    public void buyBookSuccess() {
+        BooksService service = new BooksService();
+        String result = service.buyBooks(new BooksInput(1, 1));
+        assertEquals("Book bought..", result);
+
+    }
 }
