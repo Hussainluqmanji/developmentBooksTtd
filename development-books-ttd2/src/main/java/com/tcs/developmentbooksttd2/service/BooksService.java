@@ -23,6 +23,10 @@ public class BooksService {
 	}
 
 	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
+		
+		if (booksBought.size() == 1)
+			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
+
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		List<Integer> bookGroups = new ArrayList<Integer>();
 		double priceOfSimilarBooksLeft = 0;
@@ -61,6 +65,15 @@ public class BooksService {
 				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
 		priceSummary.setTotalBooks(totalBooks);
 		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
+		return priceSummary;
+	}
+	
+	public PriceSummary createPriceSummaryForOnlyOneBookType(BooksInput booksInput) {
+		PriceSummary priceSummary = new PriceSummary();
+		priceSummary.setActualPrice(50 * booksInput.getQuantity());
+		priceSummary.setFinalPrice(50 * booksInput.getQuantity());
+		priceSummary.setTotalBooks(booksInput.getQuantity());
+		priceSummary.setTotalDiscount(0);
 		return priceSummary;
 	}
 
