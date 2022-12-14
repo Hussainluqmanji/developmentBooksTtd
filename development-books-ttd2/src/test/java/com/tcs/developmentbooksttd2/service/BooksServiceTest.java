@@ -33,7 +33,6 @@ public class BooksServiceTest {
 		books.add(new BooksInput(1, 1));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(50.0, result.getFinalPrice(), 0.0);
-
 	}
 
 	@Test
@@ -41,9 +40,7 @@ public class BooksServiceTest {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
-
 		assertEquals(50.0, result.getFinalPrice(), 0.0);
-
 	}
 
 	@Test
@@ -63,9 +60,8 @@ public class BooksServiceTest {
 		books.add(new BooksInput(3, 1));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(135.0, result.getFinalPrice(), 0.0);
-
 	}
-	
+
 	@Test
 	public void buyFourDiffBookAndGetDiscount() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
@@ -75,9 +71,8 @@ public class BooksServiceTest {
 		books.add(new BooksInput(4, 1));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(160.0, result.getFinalPrice(), 0.0);
-
 	}
-	
+
 	@Test
 	public void buyFiveDiffBookAndGetDiscount() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
@@ -88,9 +83,8 @@ public class BooksServiceTest {
 		books.add(new BooksInput(5, 1));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(187.5, result.getFinalPrice(), 0.0);
-
 	}
-	
+
 	@Test
 	public void buyTwoSetsOfAllFiveBooks() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
@@ -101,9 +95,8 @@ public class BooksServiceTest {
 		books.add(new BooksInput(5, 2));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(375.0, result.getFinalPrice(), 0.0);
-
 	}
-	
+
 	@Test
 	public void buyMultipleRandomBooks() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
@@ -114,6 +107,5 @@ public class BooksServiceTest {
 		books.add(new BooksInput(5, 12));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(875.0, result.getFinalPrice(), 0.0);
-
 	}
 }

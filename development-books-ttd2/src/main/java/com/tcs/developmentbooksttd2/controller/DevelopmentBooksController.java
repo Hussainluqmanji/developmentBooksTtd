@@ -23,7 +23,7 @@ public class DevelopmentBooksController {
 	public List<Books> getAllAvailableBooksName() {
 		return service.getAllBooks();
 	}
-	
+
 	@PostMapping("/buyBooks")
 	public PriceSummary buyBooks(@RequestBody List<BooksInput> booksBought) {
 		return service.calculateBooksCostWithDiscount(booksBought);

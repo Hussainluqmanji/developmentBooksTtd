@@ -27,10 +27,8 @@ public class DevelopmentBooksControllerTest {
 		DevelopmentBooksController controller = new DevelopmentBooksController();
 		controller.service = new BooksService();
 		List<BooksInput> books = new ArrayList<BooksInput>();
-    	books.add(new BooksInput(1, 1));
-        PriceSummary result = controller.buyBooks(books);
-     
+		books.add(new BooksInput(1, 1));
+		PriceSummary result = controller.buyBooks(books);
 		assertEquals(50.0, result.getFinalPrice(), 0.0);
-
 	}
 }
