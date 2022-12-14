@@ -1,5 +1,6 @@
 package com.tcs.developmentbooksttd2.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,8 +23,21 @@ public class BooksService {
 
 	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
-		double finalPrice = calculatePriceForBooksWithDiscount(totalBooks);;
-		return finalPrice;
+		List<Integer> bookGroups = new ArrayList<Integer>();
+		
+		int noOfGroups = 1 + (totalBooks / booksBought.size());
+        double finalPrice = 0;
+
+		for (int i = 0; i < noOfGroups; i++) {
+			int typesOfBookLeft = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
+				bookGroups.add(typesOfBookLeft);
+				booksBought.forEach(book -> {
+					book.setQuantity(book.getQuantity() - 1);
+				});
+			} 
+		
+	    finalPrice = bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
+	    return finalPrice;
 	}
 	
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
