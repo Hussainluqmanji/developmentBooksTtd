@@ -22,8 +22,14 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
-		
+	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {		
+		if (booksBought.size() == 1)
+			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
+		else
+			return groupBooksForDiscount(booksBought);
+	}
+	
+	public PriceSummary groupBooksForDiscount(List<BooksInput> booksBought) {
 		if (booksBought.size() == 1)
 			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
 
