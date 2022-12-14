@@ -12,7 +12,7 @@ import com.tcs.developmentbooksttd2.model.BooksInput;
 
 @Service
 public class BooksService {
-	
+
 	private static final double SINGLE_BOOK_PRICE = 50.0;
 
 	public List<Books> getAllBooks() {
@@ -24,13 +24,11 @@ public class BooksService {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		double actualCost = totalBooks * SINGLE_BOOK_PRICE;
 		double discount = 0;
-		if(totalBooks == 2)
-		{
+		if (totalBooks == 2) {
 			discount = 5;
 		}
 
-		else if(totalBooks == 3)
-		{
+		else if (totalBooks == 3) {
 			discount = 10;
 		}
 		double finalPrice = actualCost - (actualCost * (discount / 100));

@@ -19,34 +19,33 @@ public class BooksServiceTest {
 	public void setUp() {
 		service = new BooksService();
 	}
-	
+
 	@Test
-	public void getAllBooks()
-	{
+	public void getAllBooks() {
 		List<Books> books = service.getAllBooks();
 		assertEquals(5, books.size());
 	}
-	
-    @Test
-    public void buyBookSuccess() {
-    	List<BooksInput> books = new ArrayList<BooksInput>();
-    	books.add(new BooksInput(1, 1));
-        double result = service.calculateBooksCostWithDiscount(books);
-        assertEquals(50.0, result, 0.0);
 
-    }
-    
-    @Test
-    public void buyMultipleCopliesOfSameBooks() {
-    	List<BooksInput> books = new ArrayList<BooksInput>();
-    	books.add(new BooksInput(1, 5));
-        double result = service.calculateBooksCostWithDiscount(books);
-     
-        assertEquals(250.0, result, 0.0);
+	@Test
+	public void buyBookSuccess() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(50.0, result, 0.0);
 
-    }
-    
-    @Test
+	}
+
+	@Test
+	public void buyMultipleCopliesOfSameBooks() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 5));
+		double result = service.calculateBooksCostWithDiscount(books);
+
+		assertEquals(250.0, result, 0.0);
+
+	}
+
+	@Test
 	public void buyTwoDiffBookAndGetDiscount() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
@@ -54,8 +53,8 @@ public class BooksServiceTest {
 		double result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(95.0, result, 0.0);
 	}
-    
-    @Test
+
+	@Test
 	public void buyThreeDiffBookAndGetDiscount() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 1));
