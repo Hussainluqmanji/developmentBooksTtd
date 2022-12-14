@@ -22,21 +22,23 @@ public class BooksService {
 
 	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
-		double actualCost = totalBooks * SINGLE_BOOK_PRICE;
-		double discount = 0;
-		if (totalBooks == 2) {
-			discount = 5;
-		}
-
-		else if (totalBooks == 3) {
-			discount = 10;
-		} else if (totalBooks == 4) {
-			discount = 20;
-		} else if (totalBooks == 5) {
-			discount = 25;
-		}
-
-		double finalPrice = actualCost - (actualCost * (discount / 100));
+		double finalPrice = calculatePriceForBooksWithDiscount(totalBooks);;
 		return finalPrice;
+	}
+	
+	public double calculatePriceForBooksWithDiscount(int differentBooks) {
+		double discountedPrice = 0;
+		double actualCost = differentBooks * SINGLE_BOOK_PRICE;
+		if (differentBooks == 1)
+			discountedPrice = 50;
+		else if (differentBooks == 2)
+			discountedPrice = actualCost - (actualCost * (5.0 / 100));
+		else if (differentBooks == 3)
+			discountedPrice = actualCost - (actualCost * (10.0 / 100));
+		else if (differentBooks == 4)
+			discountedPrice = actualCost - (actualCost * (20.0 / 100));
+		else if (differentBooks == 5)
+			discountedPrice = actualCost - (actualCost * (25.0 / 100));
+		return discountedPrice;
 	}
 }
