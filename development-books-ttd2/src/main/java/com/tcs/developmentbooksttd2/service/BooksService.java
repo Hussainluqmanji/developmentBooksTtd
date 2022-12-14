@@ -29,6 +29,10 @@ public class BooksService {
 			discount = 5;
 		}
 
+		else if(totalBooks == 3)
+		{
+			discount = 10;
+		}
 		double finalPrice = actualCost - (actualCost * (discount / 100));
 		return finalPrice;
 	}
