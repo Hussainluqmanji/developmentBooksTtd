@@ -102,4 +102,17 @@ public class BooksServiceTest {
 		assertEquals(375.0, result, 0.0);
 
 	}
+	
+	@Test
+	public void buyMultipleRandomBooks() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 2));
+		books.add(new BooksInput(2, 2));
+		books.add(new BooksInput(3, 2));
+		books.add(new BooksInput(4, 2));
+		books.add(new BooksInput(5, 12));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(875.0, result, 0.0);
+
+	}
 }

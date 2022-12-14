@@ -24,26 +24,32 @@ public class BooksService {
 	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		List<Integer> bookGroups = new ArrayList<Integer>();
-		
+		double priceOfSimilarBooksLeft = 0;
 		int noOfGroups = 1 + (totalBooks / booksBought.size());
-        double finalPrice = 0;
+		double finalPrice = 0;
 
 		for (int i = 0; i < noOfGroups; i++) {
 			int typesOfBookLeft = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
+			if (typesOfBookLeft > 1) {
 				bookGroups.add(typesOfBookLeft);
 				reduceQuantityOfAlreadyBookIntoGroups(booksBought);
-			} 
-		
-	    finalPrice = bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
-	    return finalPrice;
+			} else {
+				priceOfSimilarBooksLeft = booksBought.stream().filter(book -> book.getQuantity() > 0)
+						.mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
+				break;
+			}
+		}
+
+		finalPrice = priceOfSimilarBooksLeft + bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
+		return finalPrice;
 	}
-	
+
 	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
 		books.forEach(book -> {
 			book.setQuantity(book.getQuantity() - 1);
 		});
 	}
-	
+
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
 		double discountedPrice = 0;
 		double actualCost = differentBooks * SINGLE_BOOK_PRICE;
