@@ -39,15 +39,7 @@ public class BooksService {
 				break;
 			}
 		}
-
-		PriceSummary priceSummary = new PriceSummary();
-		priceSummary.setActualPrice(50 * totalBooks);
-		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
-				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
-		priceSummary.setTotalBooks(totalBooks);
-		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
-
-		return priceSummary;
+		return createPriceSummaryForMultipleBookGroups(bookGroups, totalBooks, priceOfSimilarBooksLeft);
 	}
 
 	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
@@ -59,6 +51,17 @@ public class BooksService {
 	public double calculatePriceForBooksWithoutDiscount(List<BooksInput> books) {
 		return books.stream().filter(book -> book.getQuantity() > 0)
 				.mapToDouble(book -> book.getQuantity() * SINGLE_BOOK_PRICE).sum();
+	}
+
+	public PriceSummary createPriceSummaryForMultipleBookGroups(List<Integer> bookGroups, int totalBooks,
+			double priceOfSimilarBooksLeft) {
+		PriceSummary priceSummary = new PriceSummary();
+		priceSummary.setActualPrice(50 * totalBooks);
+		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
+				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
+		priceSummary.setTotalBooks(totalBooks);
+		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
+		return priceSummary;
 	}
 
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
