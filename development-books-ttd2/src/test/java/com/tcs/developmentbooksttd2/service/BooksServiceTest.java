@@ -26,4 +26,12 @@ public class BooksServiceTest {
         assertEquals(50.0, result, 0.0);
 
     }
+    
+    @Test
+    public void buyMultipleCopliesOfSameBooks() {
+        BooksService service = new BooksService();
+        double result = service.buyBooks(new BooksInput(1, 5));
+        assertEquals(250.0, result, 0.0);
+
+    }
 }
