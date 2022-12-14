@@ -18,7 +18,9 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public String buyBooks(BooksInput booksBought) {
-		return "Book bought..";
+	public double buyBooks(BooksInput booksBought) {
+		List<Books> books = getAllBooks();
+		return books.stream().filter(book -> book.getId() == booksBought.getBookId()).findAny().get().getPrice();
+
 	}
 }

@@ -24,7 +24,7 @@ public class DevelopmentBooksController {
 	}
 	
 	@PostMapping("/buyBooks")
-	public String buyBooks(@RequestBody BooksInput booksBought) {
+	public double buyBooks(@RequestBody BooksInput booksBought) {
 		return service.buyBooks(booksBought);
 	}
 }

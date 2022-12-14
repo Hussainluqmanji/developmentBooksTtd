@@ -22,8 +22,8 @@ public class BooksServiceTest {
     @Test
     public void buyBookSuccess() {
         BooksService service = new BooksService();
-        String result = service.buyBooks(new BooksInput(1, 1));
-        assertEquals("Book bought..", result);
+        double result = service.buyBooks(new BooksInput(1, 1));
+        assertEquals(50.0, result, 0.0);
 
     }
 }
