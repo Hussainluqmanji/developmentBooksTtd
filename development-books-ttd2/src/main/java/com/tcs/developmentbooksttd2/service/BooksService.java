@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.developmentbooksttd2.enums.BooksEnum;
 import com.tcs.developmentbooksttd2.model.Books;
 import com.tcs.developmentbooksttd2.model.BooksInput;
+import com.tcs.developmentbooksttd2.model.PriceSummary;
 
 @Service
 public class BooksService {
@@ -21,7 +22,7 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
+	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		List<Integer> bookGroups = new ArrayList<Integer>();
 		double priceOfSimilarBooksLeft = 0;
@@ -39,8 +40,14 @@ public class BooksService {
 			}
 		}
 
-		finalPrice = priceOfSimilarBooksLeft + bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum();
-		return finalPrice;
+		PriceSummary priceSummary = new PriceSummary();
+		priceSummary.setActualPrice(50 * totalBooks);
+		priceSummary.setFinalPrice(priceOfSimilarBooksLeft
+				+ bookGroups.stream().mapToDouble(group -> calculatePriceForBooksWithDiscount(group)).sum());
+		priceSummary.setTotalBooks(totalBooks);
+		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
+
+		return priceSummary;
 	}
 
 	public void reduceQuantityOfAlreadyBookIntoGroups(List<BooksInput> books) {
