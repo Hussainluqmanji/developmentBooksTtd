@@ -20,7 +20,7 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public double buyBooks(List<BooksInput> booksBought) {
+	public double calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
 		double actualCost = totalBooks * SINGLE_BOOK_PRICE;
 		double discount = 0;
