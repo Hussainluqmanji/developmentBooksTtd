@@ -45,4 +45,14 @@ public class BooksServiceTest {
         assertEquals(250.0, result, 0.0);
 
     }
+    
+    @Test
+	public void buyTwoDiffBookAndGetDiscount() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 1));
+		double result = service.buyBooks(books);
+		assertEquals(95.0, result, 0.0);
+
+	}
 }

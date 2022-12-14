@@ -21,6 +21,15 @@ public class BooksService {
 	}
 
 	public double buyBooks(List<BooksInput> booksBought) {
-		return booksBought.stream().mapToInt(book -> book.getQuantity()).sum() * SINGLE_BOOK_PRICE;
+		int totalBooks = booksBought.stream().mapToInt(book -> book.getQuantity()).sum();
+		double actualCost = totalBooks * SINGLE_BOOK_PRICE;
+		double discount = 0;
+		if(totalBooks == 2)
+		{
+			discount = 5;
+		}
+
+		double finalPrice = actualCost - (actualCost * (discount / 100));
+		return finalPrice;
 	}
 }
