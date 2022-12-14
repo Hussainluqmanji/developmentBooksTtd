@@ -38,10 +38,10 @@ public class BooksServiceTest {
 	@Test
 	public void buyMultipleCopliesOfSameBooks() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
-		books.add(new BooksInput(1, 5));
+		books.add(new BooksInput(1, 1));
 		double result = service.calculateBooksCostWithDiscount(books);
 
-		assertEquals(250.0, result, 0.0);
+		assertEquals(50.0, result, 0.0);
 
 	}
 
@@ -74,6 +74,19 @@ public class BooksServiceTest {
 		books.add(new BooksInput(4, 1));
 		double result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(160.0, result, 0.0);
+
+	}
+	
+	@Test
+	public void buyFiveDiffBookAndGetDiscount() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 1));
+		books.add(new BooksInput(2, 1));
+		books.add(new BooksInput(3, 1));
+		books.add(new BooksInput(4, 1));
+		books.add(new BooksInput(5, 1));
+		double result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(187.5, result, 0.0);
 
 	}
 }
