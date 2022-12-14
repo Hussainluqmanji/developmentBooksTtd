@@ -20,7 +20,7 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public double buyBooks(BooksInput booksBought) {
-		return booksBought.getQuantity() * SINGLE_BOOK_PRICE;
+	public double buyBooks(List<BooksInput> booksBought) {
+		return booksBought.stream().mapToInt(book -> book.getQuantity()).sum() * SINGLE_BOOK_PRICE;
 	}
 }

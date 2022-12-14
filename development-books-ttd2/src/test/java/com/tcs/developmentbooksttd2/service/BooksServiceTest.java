@@ -2,6 +2,7 @@ package com.tcs.developmentbooksttd2.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,14 +29,19 @@ public class BooksServiceTest {
 	
     @Test
     public void buyBookSuccess() {
-        double result = service.buyBooks(new BooksInput(1, 1));
+    	List<BooksInput> books = new ArrayList<BooksInput>();
+    	books.add(new BooksInput(1, 1));
+        double result = service.buyBooks(books);
         assertEquals(50.0, result, 0.0);
 
     }
     
     @Test
     public void buyMultipleCopliesOfSameBooks() {
-        double result = service.buyBooks(new BooksInput(1, 5));
+    	List<BooksInput> books = new ArrayList<BooksInput>();
+    	books.add(new BooksInput(1, 5));
+        double result = service.buyBooks(books);
+     
         assertEquals(250.0, result, 0.0);
 
     }
