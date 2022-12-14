@@ -116,4 +116,16 @@ public class BooksServiceTest {
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);
 		assertEquals(500.0, result.getFinalPrice(), 0.0);
 	}
+	
+	@Test
+	public void checkMaximumDiscountedPrice() {
+		List<BooksInput> books = new ArrayList<BooksInput>();
+		books.add(new BooksInput(1, 2));
+		books.add(new BooksInput(2, 2));
+		books.add(new BooksInput(3, 2));
+		books.add(new BooksInput(4, 1));
+		books.add(new BooksInput(5, 1));
+		PriceSummary result = service.calculateBooksCostWithDiscount(books);
+		assertEquals(320.0, result.getFinalPrice(), 0.0);
+	}
 }

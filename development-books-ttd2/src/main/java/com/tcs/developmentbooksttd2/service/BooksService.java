@@ -49,6 +49,7 @@ public class BooksService {
 				break;
 			}
 		}
+		makeOptimalGroups(bookGroups);
 		return createPriceSummaryForMultipleBookGroups(bookGroups, totalBooks, priceOfSimilarBooksLeft);
 	}
 
@@ -81,6 +82,16 @@ public class BooksService {
 		priceSummary.setTotalBooks(booksInput.getQuantity());
 		priceSummary.setTotalDiscount(0);
 		return priceSummary;
+	}
+	
+	public void makeOptimalGroups(List<Integer> groups) {
+		for (int i = 0; i < groups.size(); i++) {
+			Integer group = groups.get(i);
+			if (group == 5 && groups.indexOf(3) != -1) {
+				groups.set(i, 4);
+				groups.set(groups.indexOf(3), 4);
+			}
+		}
 	}
 
 	public double calculatePriceForBooksWithDiscount(int differentBooks) {
