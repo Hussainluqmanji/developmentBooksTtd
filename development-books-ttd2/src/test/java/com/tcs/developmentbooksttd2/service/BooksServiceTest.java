@@ -110,7 +110,7 @@ public class BooksServiceTest {
 	}
 	
 	@Test
-	public void userOnlyBoughtSimilatBooks() {
+	public void userOnlyBoughtSimilarBooks() {
 		List<BooksInput> books = new ArrayList<BooksInput>();
 		books.add(new BooksInput(1, 10));
 		PriceSummary result = service.calculateBooksCostWithDiscount(books);

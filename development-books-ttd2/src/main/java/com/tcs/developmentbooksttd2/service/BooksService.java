@@ -22,13 +22,13 @@ public class BooksService {
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
-	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {		
+	public PriceSummary calculateBooksCostWithDiscount(List<BooksInput> booksBought) {
 		if (booksBought.size() == 1)
 			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
 		else
 			return groupBooksForDiscount(booksBought);
 	}
-	
+
 	public PriceSummary groupBooksForDiscount(List<BooksInput> booksBought) {
 		if (booksBought.size() == 1)
 			return createPriceSummaryForOnlyOneBookType(booksBought.get(0));
@@ -37,7 +37,6 @@ public class BooksService {
 		List<Integer> bookGroups = new ArrayList<Integer>();
 		double priceOfSimilarBooksLeft = 0;
 		int noOfGroups = 1 + (totalBooks / booksBought.size());
-		double finalPrice = 0;
 
 		for (int i = 0; i < noOfGroups; i++) {
 			int typesOfBookLeft = (int) booksBought.stream().filter(book -> book.getQuantity() > 0).count();
@@ -74,7 +73,7 @@ public class BooksService {
 		priceSummary.setTotalDiscount(priceSummary.getActualPrice() - priceSummary.getFinalPrice());
 		return priceSummary;
 	}
-	
+
 	public PriceSummary createPriceSummaryForOnlyOneBookType(BooksInput booksInput) {
 		PriceSummary priceSummary = new PriceSummary();
 		priceSummary.setActualPrice(50 * booksInput.getQuantity());
@@ -83,7 +82,7 @@ public class BooksService {
 		priceSummary.setTotalDiscount(0);
 		return priceSummary;
 	}
-	
+
 	public void makeOptimalGroups(List<Integer> groups) {
 		for (int i = 0; i < groups.size(); i++) {
 			Integer group = groups.get(i);
